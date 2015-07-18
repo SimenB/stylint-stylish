@@ -1,0 +1,33 @@
+{
+  "preset": "node-style-guide",
+  "esnext": true,
+  "requireTrailingComma": null,
+  "validateLineBreaks": null,
+  "disallowSpacesInFunction": null,
+  "disallowMultipleVarDecl": null,
+  "requireCapitalizedComments": {
+    "allExcept": [ "jshint", "jscs" ]
+  },
+  "requireSpacesInFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "disallowQuotedKeysInObjects": true,
+  "requireSpacesInsideObjectBrackets": "all",
+  "requireSpacesInsideArrayBrackets": "all",
+  "requirePaddingNewLineAfterVariableDeclaration": true,
+  "requirePaddingNewlinesBeforeKeywords": [
+    "do", "for", "if", "switch", "case", "try", "void", "while", "with", "return", "typeof"
+  ],
+  "disallowPaddingNewlinesInBlocks": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowMultipleLineStrings": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleSpaces": true,
+  "disallowNotOperatorsInConditionals": true,
+  "requireLineFeedAtFileEnd": true,
+  "requireSemicolons": true,
+  "requirePaddingNewLinesBeforeExport": true,
+  "requirePaddingNewLinesAfterUseStrict": true,
+  "maximumLineLength": 120
+}

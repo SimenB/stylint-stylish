@@ -1,0 +1,51 @@
+{
+  "name": "stylint-stylish",
+  "version": "0.0.1",
+  "description": "A stylish reporter for Stylint, heavily inspired by jshint-stylish",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "compile": "babel src/ -d lib/",
+    "lint": "jshint src/ test.js && jscs src/ test.js",
+    "prepublish": "npm run compile",
+    "pretest": "npm run lint",
+    "test": "mocha --compilers js:babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimenB/stylint-stylish.git"
+  },
+  "keywords": [
+    "lint",
+    "reporter",
+    "stylint",
+    "stylish",
+    "stylus"
+  ],
+  "author": "Simen Bekkhus <sbekkhus91@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SimenB/stylint-stylish/issues"
+  },
+  "homepage": "https://github.com/SimenB/stylint-stylish#readme",
+  "dependencies": {
+    "chalk": "^1.1.0",
+    "lodash.isnumber": "^3.0.1",
+    "log-symbols": "^1.0.2",
+    "pluralize": "^1.1.2",
+    "text-table": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel": "^5.6.23",
+    "jscs": "^1.13.1",
+    "jshint": "^2.8.0",
+    "mocha": "^2.2.5",
+    "stylint": "^1.0.9",
+    "stylus": "^0.51.1"
+  },
+  "peerDependencies": {
+    "stylint": "*"
+  }
+}
