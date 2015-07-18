@@ -21,6 +21,7 @@
     "lint",
     "reporter",
     "stylint",
+    "stylint-reporter",
     "stylish",
     "stylus"
   ],

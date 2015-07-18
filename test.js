@@ -1,7 +1,6 @@
 /*jshint mocha:true*/
 
 import assert from 'assert';
-import path from 'path';
 import chalk from 'chalk';
 import stylint from 'stylint';
 const stylintInstance = stylint().create();
@@ -11,7 +10,7 @@ describe('stylint-stylish', () => {
     stylintInstance.state.quiet = true;
     stylintInstance.state.watching = true;
     stylintInstance.state.strictMode = false;
-    stylintInstance.config.reporter = path.resolve('./');
+    stylintInstance.config.reporter = require.resolve('./src');
     stylintInstance.init();
   });
 
