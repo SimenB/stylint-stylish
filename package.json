@@ -1,6 +1,6 @@
 {
   "name": "stylint-stylish",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A stylish reporter for Stylint, heavily inspired by jshint-stylish",
   "main": "lib/index.js",
   "files": [
