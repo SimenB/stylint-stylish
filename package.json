@@ -47,6 +47,6 @@
     "stylus": "^0.51.1"
   },
   "peerDependencies": {
-    "stylint": "*"
+    "stylint": ">= 1.0.0"
   }
 }
