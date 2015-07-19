@@ -23,6 +23,28 @@ To use it, just set `reporter` to `stylint-stylish` in the config (`.stylintrc`)
 }
 ```
 
+## Options
+To use options, add a `reporterOptions`-object to the config
+
+```json
+{
+  "reporter": "stylint-stylish",
+  "reporterOptions": {
+    "absolutePath": true
+  },
+  "noImportant": true,
+  "semicolons": {
+    "expect": "always",
+    "error": true
+  }
+}
+```
+
+#### `absolutePath`
+Type: `boolean`, default: `false`
+
+When printing out a filename, print the absolute path instead of a relative one
+
 
 [travis-url]: https://travis-ci.org/SimenB/stylint-stylish
 [travis-image]: https://img.shields.io/travis/SimenB/stylint-stylish.svg

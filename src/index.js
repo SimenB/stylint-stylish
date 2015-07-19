@@ -1,3 +1,5 @@
+import path from 'path'
+import pathIsAbsolute from 'path-is-absolute'
 import chalk from 'chalk'
 import logSymbols from 'log-symbols'
 import table from 'text-table'
@@ -50,6 +52,9 @@ function doneHandler (kill) {
     this.cache.msg = `Stylint: You're all clear!`
   }
 
+  currFile = undefined
+  currTable = []
+
   return this.done()
 }
 
@@ -61,9 +66,14 @@ export default function (msg, done, kill) {
   const isWarning = this.state.severity === 'Warning'
 
   if (currFile !== this.cache.file) {
+    const {absolutePath} = (this.config.reporterOptions || {})
     currFile = this.cache.file
 
-    currTable.push([ `${chalk.underline(currFile)}:\n` ])
+    const filename = absolutePath ?
+      pathIsAbsolute(currFile) ? currFile : path.resolve(currFile) :
+      pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
+
+    currTable.push([`${chalk.underline(filename)}:\n`])
   }
 
   currTable.push([
