@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "compile": "babel src/ -d lib/",
-    "lint": "jshint src/ test.js && jscs src/ test.js",
+    "lint": "standard",
     "prepublish": "npm run compile",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel/register"
@@ -40,9 +40,8 @@
   },
   "devDependencies": {
     "babel": "^5.6.23",
-    "jscs": "^1.13.1",
-    "jshint": "^2.8.0",
     "mocha": "^2.2.5",
+    "standard": "^4.5.4",
     "stylint": "^1.0.9",
     "stylus": "^0.51.1"
   },

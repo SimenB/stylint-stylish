@@ -1,73 +1,76 @@
-import chalk from 'chalk';
-import logSymbols from 'log-symbols';
-import table from 'text-table';
-import pluralize from 'pluralize';
-import isNumber from 'lodash.isnumber';
+import chalk from 'chalk'
+import logSymbols from 'log-symbols'
+import table from 'text-table'
+import pluralize from 'pluralize'
+import isNumber from 'lodash.isnumber'
 
-let currFile, currTable = [];
+let currFile
+let currTable = []
 
 function createSummary (errs, warns, total) {
   if (total === 0) {
-    return 'No violations';
+    return 'No violations'
   }
 
-  let output = '';
+  let output = ''
 
   if (errs > 0) {
-    output += `\t${logSymbols.error}  ${pluralize('error', errs, true)}`;
+    output += `\t${logSymbols.error}  ${pluralize('error', errs, true)}`
 
     if (isNumber(this.config.maxErrors)) {
-      output += ` (Max Errors: ${this.config.maxErrors})`;
+      output += ` (Max Errors: ${this.config.maxErrors})`
     }
 
-    output += '\n';
+    output += '\n'
   }
 
   if (warns > 0) {
-    output += `\t${logSymbols.warning}  ${pluralize('warning', warns, true)}`;
+    output += `\t${logSymbols.warning}  ${pluralize('warning', warns, true)}`
 
     if (isNumber(this.config.maxWarnings)) {
-      output += ` (Max Warnings: ${this.config.maxWarnings})`;
+      output += ` (Max Warnings: ${this.config.maxWarnings})`
     }
 
-    output += '\n';
+    output += '\n'
   }
 
-  return output;
+  return output
 }
 
 function doneHandler (kill) {
-  const errs = this.cache.errs.length, warns = this.cache.warnings.length, total = errs + warns;
+  const errs = this.cache.errs.length
+  const warns = this.cache.warnings.length
+  const total = errs + warns
 
-  this.cache.msg = `${table(currTable)}\n${createSummary.call(this, errs, warns, total)}`;
+  this.cache.msg = `${table(currTable)}\n${createSummary.call(this, errs, warns, total)}`
 
   if (kill === 'kill') {
-    this.cache.msg += '\nStylint: Over Error or Warning Limit.';
+    this.cache.msg += '\nStylint: Over Error or Warning Limit.'
   } else if (total === 0) {
-    this.cache.msg = `Stylint: You're all clear!`;
+    this.cache.msg = `Stylint: You're all clear!`
   }
 
-  return this.done();
+  return this.done()
 }
 
 export default function (msg, done, kill) {
   if (done === 'done') {
-    return doneHandler.call(this, kill);
+    return doneHandler.call(this, kill)
   }
 
-  const isWarning = this.state.severity === 'Warning';
+  const isWarning = this.state.severity === 'Warning'
 
   if (currFile !== this.cache.file) {
-    currFile = this.cache.file;
+    currFile = this.cache.file
 
-    currTable.push([ `${chalk.underline(currFile)}:\n` ]);
+    currTable.push([ `${chalk.underline(currFile)}:\n` ])
   }
 
   currTable.push([
     '',
     chalk.gray(`line ${this.cache.lineNo}:`),
     isWarning ? (process.platform === 'win32' ? chalk.cyan(msg) : chalk.blue(msg)) : chalk.red(msg)
-  ]);
+  ])
 
-  return '';
+  return ''
 }
