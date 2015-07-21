@@ -49,7 +49,7 @@ function doneHandler (kill) {
   if (kill === 'kill') {
     this.cache.msg += '\nStylint: Over Error or Warning Limit.'
   } else if (total === 0) {
-    this.cache.msg = `Stylint: You're all clear!`
+    this.cache.msg = ''
   }
 
   currFile = undefined

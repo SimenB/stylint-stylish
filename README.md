@@ -1,7 +1,12 @@
 # stylint-stylish
 > Stylish formatter for Stylint
 
-[![NPM version][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Dependency status][david-image]][david-url]
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+
+[![Dependency Status][david-image]][david-url]
+[![Dev Dependency Status][david-dev-image]][david-dev-url]
+[![Peer Dependency Status][david-peer-image]][david-peer-url]
 
 ## Screenshots
 ![This reporter][new-image]
@@ -52,5 +57,9 @@ When printing out a filename, print the absolute path instead of a relative one
 [npm-image]: https://img.shields.io/npm/v/stylint-stylish.svg
 [david-url]: https://david-dm.org/SimenB/stylint-stylish
 [david-image]: https://img.shields.io/david/SimenB/stylint-stylish.svg
+[david-dev-url]: https://david-dm.org/SimenB/stylint-stylish#info=devDependencies
+[david-dev-image]: https://img.shields.io/david/dev/SimenB/stylint-stylish.svg
+[david-peer-url]: https://david-dm.org/SimenB/stylint-stylish#info=peerDependencies
+[david-peer-image]: https://img.shields.io/david/peer/SimenB/stylint-stylish.svg
 [new-image]: screenshots/this.png
 [orig-image]: screenshots/original.png

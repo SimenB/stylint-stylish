@@ -2,21 +2,18 @@
   "name": "stylint-stylish",
   "version": "1.1.0",
   "description": "A stylish reporter for Stylint, heavily inspired by jshint-stylish",
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
-    "lib/"
+    "index.js"
   ],
   "scripts": {
-    "compile": "babel src/ -d lib/",
+    "compile": "babel stylish.js -o index.js",
     "lint": "standard",
     "prepublish": "npm run compile",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel/register"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SimenB/stylint-stylish.git"
-  },
+  "repository": "SimenB/stylint-stylish",
   "keywords": [
     "lint",
     "reporter",
@@ -44,8 +41,7 @@
     "lodash.clonedeep": "^3.0.1",
     "mocha": "^2.2.5",
     "standard": "^4.5.4",
-    "stylint": "^1.0.9",
-    "stylus": "^0.51.1"
+    "stylint": "^1.0.9"
   },
   "peerDependencies": {
     "stylint": ">= 1.0.0"

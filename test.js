@@ -1,4 +1,4 @@
-/*global describe, it, beforeEach */
+/* eslint-env mocha */
 
 import assert from 'assert'
 import chalk from 'chalk'
@@ -18,7 +18,7 @@ describe('stylint-stylish', () => {
     stylintInstance.state.quiet = true
     stylintInstance.state.watching = true
     stylintInstance.state.strictMode = false
-    stylintInstance.config.reporter = require.resolve('./src')
+    stylintInstance.config.reporter = require.resolve('./')
 
     stylintInstance.init()
   })
@@ -26,7 +26,7 @@ describe('stylint-stylish', () => {
   it('should report if all green', () => {
     var report = stylintInstance.reporter('meh', 'done').msg
 
-    assert.equal(`Stylint: You're all clear!`, report)
+    assert.equal('', report)
   })
 
   it('should report violations', () => {
