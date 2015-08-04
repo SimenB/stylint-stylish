@@ -10,7 +10,9 @@
 
 ## Screenshots
 ![This reporter][new-image]
+
 vs original:
+
 ![Original reporter][orig-image]
 
 ## Usage
