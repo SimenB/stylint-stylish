@@ -18,7 +18,8 @@ describe('stylint-stylish', () => {
     stylintInstance.state.quiet = true
     stylintInstance.state.watching = true
     stylintInstance.state.strictMode = false
-    stylintInstance.config.reporter = require.resolve('./')
+    stylintInstance.config.reporter = require.resolve('./stylish')
+    stylintInstance.config.reporterOptions = undefined
 
     stylintInstance.init()
   })
@@ -48,15 +49,18 @@ describe('stylint-stylish', () => {
 
     report = chalk.stripColor(report).split('\n')
 
-    assert.equal(report.length, 8)
-    assert.equal(report[0], 'file.styl:')
-    assert.equal(report[1].trim(), 'line 15:  woop')
-    assert.equal(report[2].trim(), 'line 10:  dee')
-    assert.equal(report[3], 'meep.styl:')
-    assert.equal(report[4].trim(), 'line 15:  doo')
-    assert.equal(report[5], '\t✖  2 errors')
-    assert.equal(report[6], '\t⚠  1 warning')
+    assert.equal(report.length, 11)
+    assert.equal(report[0], '')
+    assert.equal(report[1], 'file.styl')
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3].trim(), 'line 10:  dee')
+    assert.equal(report[4], '')
+    assert.equal(report[5], 'meep.styl')
+    assert.equal(report[6].trim(), 'line 15:  doo')
     assert.equal(report[7], '')
+    assert.equal(report[8].trim(), '✖  2 errors')
+    assert.equal(report[9].trim(), '⚠  1 warning')
+    assert.equal(report[10], '')
   })
 
   it('should report violations with absolute path', () => {
@@ -71,10 +75,33 @@ describe('stylint-stylish', () => {
 
     report = chalk.stripColor(report).split('\n')
 
-    assert.equal(report.length, 4)
-    assert.equal(report[0], `${process.cwd()}/file.styl:`)
-    assert.equal(report[1].trim(), 'line 15:  woop')
-    assert.equal(report[2], '\t⚠  1 warning')
+    assert.equal(report.length, 6)
+    assert.equal(report[0], '')
+    assert.equal(report[1], `${process.cwd()}/file.styl`)
+    assert.equal(report[2].trim(), 'line 15:  woop')
     assert.equal(report[3], '')
+    assert.equal(report[4].trim(), '⚠  1 warning')
+    assert.equal(report[5], '')
+  })
+
+  it('should report violations with max errors', () => {
+    stylintInstance.config.maxErrors = 0
+    stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.errs = [ 'meep' ]
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+
+    var report = stylintInstance.reporter('meh', 'done').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 6)
+    assert.equal(report[0], '')
+    assert.equal(report[1], `file.styl`)
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3], '')
+    assert.equal(report[4].trim(), '✖  1 error (Max Errors: 0)')
+    assert.equal(report[5], '')
   })
 })

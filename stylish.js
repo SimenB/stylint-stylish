@@ -8,8 +8,9 @@ import isNumber from 'lodash.isnumber'
 
 let currFile
 let currTable = []
+let filenames = []
 
-function createSummary (errs, warns, total) {
+function createSummary (errs, warns, total, maxErrors, maxWarnings) {
   if (total === 0) {
     return 'No violations'
   }
@@ -17,20 +18,20 @@ function createSummary (errs, warns, total) {
   let output = ''
 
   if (errs > 0) {
-    output += `\t${logSymbols.error}  ${pluralize('error', errs, true)}`
+    output += `  ${logSymbols.error}  ${pluralize('error', errs, true)}`
 
-    if (isNumber(this.config.maxErrors)) {
-      output += ` (Max Errors: ${this.config.maxErrors})`
+    if (isNumber(maxErrors)) {
+      output += ` (Max Errors: ${maxErrors})`
     }
 
     output += '\n'
   }
 
   if (warns > 0) {
-    output += `\t${logSymbols.warning}  ${pluralize('warning', warns, true)}`
+    output += `  ${logSymbols.warning}  ${pluralize('warning', warns, true)}`
 
-    if (isNumber(this.config.maxWarnings)) {
-      output += ` (Max Warnings: ${this.config.maxWarnings})`
+    if (isNumber(maxWarnings)) {
+      output += ` (Max Warnings: ${maxWarnings})`
     }
 
     output += '\n'
@@ -43,8 +44,14 @@ function doneHandler (kill) {
   const errs = this.cache.errs.length
   const warns = this.cache.warnings.length
   const total = errs + warns
+  const msg = table(currTable)
+    .split('\n')
+    .map((msg, i) => {
+      return filenames[i] ? `\n${filenames[i]}\n${msg}` : msg
+    })
+    .join('\n') + '\n\n'
 
-  this.cache.msg = `${table(currTable)}\n${createSummary.call(this, errs, warns, total)}`
+  this.cache.msg = `${msg}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`
 
   if (kill === 'kill') {
     this.cache.msg += '\nStylint: Over Error or Warning Limit.'
@@ -54,6 +61,7 @@ function doneHandler (kill) {
 
   currFile = undefined
   currTable = []
+  filenames = []
 
   return this.done()
 }
@@ -73,13 +81,13 @@ export default function (msg, done, kill) {
       pathIsAbsolute(currFile) ? currFile : path.resolve(currFile) :
       pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
 
-    currTable.push([`${chalk.underline(filename)}:\n`])
+    filenames[currTable.length] = chalk.underline(filename)
   }
 
   currTable.push([
     '',
     chalk.gray(`line ${this.cache.lineNo}:`),
-    isWarning ? (process.platform === 'win32' ? chalk.cyan(msg) : chalk.blue(msg)) : chalk.red(msg)
+    isWarning ? chalk.blue(msg) : chalk.red(msg)
   ])
 
   return ''
