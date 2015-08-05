@@ -47,6 +47,11 @@ To use options, add a `reporterOptions`-object to the config
 }
 ```
 
+#### `verbose`
+Type: `boolean`, default: `false`
+
+When printing out a violation, print the full line with the violation as well.
+
 #### `absolutePath`
 Type: `boolean`, default: `false`
 

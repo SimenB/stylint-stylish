@@ -33,8 +33,8 @@ describe('stylint-stylish', () => {
   it('should report violations', () => {
     stylintInstance.cache.file = path.resolve('file.styl')
     stylintInstance.cache.lineNo = 15
-    stylintInstance.cache.errs = [ '', '' ]
-    stylintInstance.cache.warnings = [ '' ]
+    stylintInstance.cache.errs = ['', '']
+    stylintInstance.cache.warnings = ['']
     stylintInstance.state.severity = ''
     stylintInstance.reporter('woop')
     stylintInstance.cache.lineNo = 10
@@ -64,10 +64,10 @@ describe('stylint-stylish', () => {
   })
 
   it('should report violations with absolute path', () => {
-    stylintInstance.config.reporterOptions = {absolutePath: true}
+    stylintInstance.config.reporterOptions = { absolutePath: true }
     stylintInstance.cache.file = path.resolve('file.styl')
     stylintInstance.cache.lineNo = 15
-    stylintInstance.cache.warnings = [ '' ]
+    stylintInstance.cache.warnings = ['']
     stylintInstance.state.severity = ''
     stylintInstance.reporter('woop')
 
@@ -88,7 +88,7 @@ describe('stylint-stylish', () => {
     stylintInstance.config.maxErrors = 0
     stylintInstance.cache.file = path.resolve('file.styl')
     stylintInstance.cache.lineNo = 15
-    stylintInstance.cache.errs = [ 'meep' ]
+    stylintInstance.cache.errs = ['meep']
     stylintInstance.state.severity = ''
     stylintInstance.reporter('woop')
 
@@ -102,6 +102,29 @@ describe('stylint-stylish', () => {
     assert.equal(report[2].trim(), 'line 15:  woop')
     assert.equal(report[3], '')
     assert.equal(report[4].trim(), '✖  1 error (Max Errors: 0)')
+    assert.equal(report[5], '')
+  })
+
+  it('should report original line if verbose', () => {
+    stylintInstance.config.reporterOptions = { verbose: true }
+    stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.errs = []
+    stylintInstance.cache.warnings = ['']
+    stylintInstance.cache.origLine = 'beep boop moop'
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+
+    var report = stylintInstance.reporter('meh', 'done').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 6)
+    assert.equal(report[0], '')
+    assert.equal(report[1], 'file.styl')
+    assert.equal(report[2].trim(), 'line 15:  woop  beep boop moop')
+    assert.equal(report[3], '')
+    assert.equal(report[4].trim(), '⚠  1 warning')
     assert.equal(report[5], '')
   })
 })

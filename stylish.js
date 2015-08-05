@@ -9,6 +9,16 @@ import isNumber from 'lodash.isnumber'
 let currFile
 let currTable = []
 let filenames = []
+let options
+let optionsRead = false
+
+function resetState () {
+  currFile = undefined
+  currTable = []
+  filenames = []
+  options = undefined
+  optionsRead = false
+}
 
 function createSummary (errs, warns, total, maxErrors, maxWarnings) {
   if (total === 0) {
@@ -59,9 +69,7 @@ function doneHandler (kill) {
     this.cache.msg = ''
   }
 
-  currFile = undefined
-  currTable = []
-  filenames = []
+  resetState()
 
   return this.done()
 }
@@ -71,13 +79,19 @@ export default function (msg, done, kill) {
     return doneHandler.call(this, kill)
   }
 
+  if (!optionsRead) {
+    optionsRead = true
+
+    const {absolutePath, verbose} = (this.config.reporterOptions || {})
+    options = {absolutePath, verbose}
+  }
+
   const isWarning = this.state.severity === 'Warning'
 
   if (currFile !== this.cache.file) {
-    const {absolutePath} = (this.config.reporterOptions || {})
     currFile = this.cache.file
 
-    const filename = absolutePath ?
+    const filename = options.absolutePath ?
       pathIsAbsolute(currFile) ? currFile : path.resolve(currFile) :
       pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
 
@@ -87,7 +101,8 @@ export default function (msg, done, kill) {
   currTable.push([
     '',
     chalk.gray(`line ${this.cache.lineNo}:`),
-    isWarning ? chalk.blue(msg) : chalk.red(msg)
+    isWarning ? chalk.blue(msg) : chalk.red(msg),
+    options.verbose ? chalk.gray(this.cache.origLine.trim()) : ''
   ])
 
   return ''

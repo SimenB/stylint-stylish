@@ -33,7 +33,7 @@
     "lodash.isnumber": "^3.0.1",
     "log-symbols": "^1.0.2",
     "path-is-absolute": "^1.0.0",
-    "pluralize": "^1.1.2",
+    "pluralize": "^1.1.4",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
