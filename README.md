@@ -2,7 +2,8 @@
 > Stylish formatter for Stylint
 
 [![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
+[![Linux build Status][travis-image]][travis-url]
+[![Windows Build status][appveyor-image]][appveyor-url]
 
 [![Dependency Status][david-image]][david-url]
 [![Dev Dependency Status][david-dev-image]][david-dev-url]
@@ -60,6 +61,8 @@ When printing out a filename, print the absolute path instead of a relative one
 
 [travis-url]: https://travis-ci.org/SimenB/stylint-stylish
 [travis-image]: https://img.shields.io/travis/SimenB/stylint-stylish.svg
+[appveyor-url]: https://ci.appveyor.com/project/SimenB/stylint-stylish
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/53xeie72m3yejs4c?svg=true
 [npm-url]: https://npmjs.org/package/stylint-stylish
 [npm-image]: https://img.shields.io/npm/v/stylint-stylish.svg
 [david-url]: https://david-dm.org/SimenB/stylint-stylish

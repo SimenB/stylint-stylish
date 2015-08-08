@@ -1,0 +1,30 @@
+init:
+  - git config --global core.autocrlf true
+
+environment:
+  matrix:
+  # node.js
+  - nodejs_version: "0.10"
+  - nodejs_version: "0.12"
+  # io.js
+  - nodejs_version: "1.0"
+  - nodejs_version: "2.0"
+  - nodejs_version: "3.0"
+
+# Install scripts. (runs after repo cloning)
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version && npm --version
+  # run tests
+  - npm test
+
+# Don't actually build.
+build: off
+
+matrix:
+  fast_finish: true

@@ -2,6 +2,7 @@
 
 import assert from 'assert'
 import chalk from 'chalk'
+import logSymbols from 'log-symbols'
 import stylint from 'stylint'
 import path from 'path'
 import clone from 'lodash.clonedeep'
@@ -9,6 +10,9 @@ import origCache from 'stylint/src/core/cache'
 import origState from 'stylint/src/core/state'
 
 const stylintInstance = stylint().create()
+
+const errorIcon = chalk.stripColor(logSymbols.error)
+const warningIcon = chalk.stripColor(logSymbols.warning)
 
 describe('stylint-stylish', () => {
   beforeEach(() => {
@@ -58,8 +62,8 @@ describe('stylint-stylish', () => {
     assert.equal(report[5], 'meep.styl')
     assert.equal(report[6].trim(), 'line 15:  doo')
     assert.equal(report[7], '')
-    assert.equal(report[8].trim(), '✖  2 errors')
-    assert.equal(report[9].trim(), '⚠  1 warning')
+    assert.equal(report[8].trim(), `${errorIcon}  2 errors`)
+    assert.equal(report[9].trim(), `${warningIcon}  1 warning`)
     assert.equal(report[10], '')
   })
 
@@ -77,10 +81,10 @@ describe('stylint-stylish', () => {
 
     assert.equal(report.length, 6)
     assert.equal(report[0], '')
-    assert.equal(report[1], `${process.cwd()}/file.styl`)
+    assert.equal(report[1], path.join(process.cwd(), 'file.styl'))
     assert.equal(report[2].trim(), 'line 15:  woop')
     assert.equal(report[3], '')
-    assert.equal(report[4].trim(), '⚠  1 warning')
+    assert.equal(report[4].trim(), `${warningIcon}  1 warning`)
     assert.equal(report[5], '')
   })
 
@@ -101,7 +105,7 @@ describe('stylint-stylish', () => {
     assert.equal(report[1], `file.styl`)
     assert.equal(report[2].trim(), 'line 15:  woop')
     assert.equal(report[3], '')
-    assert.equal(report[4].trim(), '✖  1 error (Max Errors: 0)')
+    assert.equal(report[4].trim(), `${errorIcon}  1 error (Max Errors: 0)`)
     assert.equal(report[5], '')
   })
 
@@ -124,7 +128,7 @@ describe('stylint-stylish', () => {
     assert.equal(report[1], 'file.styl')
     assert.equal(report[2].trim(), 'line 15:  woop  beep boop moop')
     assert.equal(report[3], '')
-    assert.equal(report[4].trim(), '⚠  1 warning')
+    assert.equal(report[4].trim(), `${warningIcon}  1 warning`)
     assert.equal(report[5], '')
   })
 })
