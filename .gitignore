@@ -1,5 +1,7 @@
 index.js
+test-es5.js
 
 node_modules/
 .idea/
 *.log
+coverage/

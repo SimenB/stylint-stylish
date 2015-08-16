@@ -7,8 +7,13 @@
     "index.js"
   ],
   "scripts": {
+    "clean": "rimraf coverage/ test-es5.js",
     "compile": "babel stylish.js -o index.js",
+    "compile-test": "babel test.js -o test-es5.js",
+    "cover": "babel-istanbul cover -x test-es5.js _mocha test-es5",
     "lint": "standard",
+    "precover": "npm run lint && npm run compile-test",
+    "prelint": "npm run clean",
     "prepublish": "npm run compile",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel/register"
@@ -38,8 +43,11 @@
   },
   "devDependencies": {
     "babel": "^5.8.20",
+    "babel-istanbul": "^0.3.17",
+    "coveralls": "^2.11.4",
     "lodash.clonedeep": "^3.0.2",
     "mocha": "^2.2.5",
+    "rimraf": "^2.4.2",
     "standard": "^5.0.0",
     "stylint": "^1.0.11"
   },
