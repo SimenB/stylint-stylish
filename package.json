@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "clean": "rimraf coverage/ test-es5.js",
+    "clean": "rimraf coverage/ index.js test-es5.js",
     "compile": "babel stylish.js -o index.js",
     "compile-test": "babel test.js -o test-es5.js",
     "cover": "babel-istanbul cover -x test-es5.js _mocha test-es5",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "babel": "^5.8.20",
     "babel-istanbul": "^0.3.17",
+    "codeclimate-test-reporter": "^0.1.0",
     "coveralls": "^2.11.4",
     "lodash.clonedeep": "^3.0.2",
     "mocha": "^2.2.5",

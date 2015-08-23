@@ -5,6 +5,7 @@
 [![Linux build Status][travis-image]][travis-url]
 [![Windows Build Status][appveyor-image]][appveyor-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
+[![Codeclimate Status][codeclimate-image]][codeclimate-url]
 
 [![Dependency Status][david-image]][david-url]
 [![Dev Dependency Status][david-dev-image]][david-dev-url]
@@ -66,6 +67,8 @@ When printing out a filename, print the absolute path instead of a relative one
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/53xeie72m3yejs4c?svg=true
 [coveralls-url]: https://coveralls.io/github/SimenB/stylint-stylish
 [coveralls-image]: https://img.shields.io/coveralls/SimenB/stylint-stylish.svg
+[codeclimate-url]: https://codeclimate.com/github/SimenB/stylint-stylish
+[codeclimate-image]: https://img.shields.io/codeclimate/github/SimenB/stylint-stylish.svg
 [npm-url]: https://npmjs.org/package/stylint-stylish
 [npm-image]: https://img.shields.io/npm/v/stylint-stylish.svg
 [david-url]: https://david-dm.org/SimenB/stylint-stylish
