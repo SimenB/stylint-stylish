@@ -34,23 +34,23 @@
   },
   "homepage": "https://github.com/SimenB/stylint-stylish#readme",
   "dependencies": {
-    "chalk": "^1.1.0",
-    "lodash.isnumber": "^3.0.1",
-    "log-symbols": "^1.0.2",
+    "chalk": "^1.0.0",
+    "lodash.isnumber": "^3.0.0",
+    "log-symbols": "^1.0.0",
     "path-is-absolute": "^1.0.0",
-    "pluralize": "^1.1.4",
+    "pluralize": "^1.0.0",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "babel": "^5.8.20",
-    "babel-istanbul": "^0.3.17",
-    "codeclimate-test-reporter": "^0.1.0",
+    "babel": "^5.8.23",
+    "babel-istanbul": "^0.3.20",
+    "codeclimate-test-reporter": "^0.1.1",
     "coveralls": "^2.11.4",
     "lodash.clonedeep": "^3.0.2",
-    "mocha": "^2.2.5",
-    "rimraf": "^2.4.2",
-    "standard": "^5.0.0",
-    "stylint": "^1.0.11"
+    "mocha": "^2.3.2",
+    "rimraf": "^2.4.3",
+    "standard": "^5.3.1",
+    "stylint": "^1.2.2"
   },
   "peerDependencies": {
     "stylint": ">= 1.0.0"

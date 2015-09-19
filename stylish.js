@@ -90,10 +90,13 @@ export default function (msg, done, kill) {
 
   if (currFile !== this.cache.file) {
     currFile = this.cache.file
+    let filename
 
-    const filename = options.absolutePath ?
-      pathIsAbsolute(currFile) ? currFile : path.resolve(currFile) :
-      pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
+    if (options.absolutePath) {
+      filename = pathIsAbsolute(currFile) ? currFile : path.resolve(currFile)
+    } else {
+      filename = pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
+    }
 
     filenames[currTable.length] = chalk.underline(filename)
   }
