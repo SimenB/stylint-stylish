@@ -1,11 +1,13 @@
 language: node_js
 node_js:
   - node
+  - 4
   - iojs-3
   - iojs-2
   - iojs-1
   - 0.12
   - '0.10'
+before_install: npm install -g npm
 addons:
   code_climate:
     repo_token: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
