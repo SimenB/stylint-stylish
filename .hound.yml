@@ -1,0 +1,5 @@
+javascript:
+  enabled: false
+eslint:
+  enabled: true
+  config_file: node_modules/standard/rc/.eslintrc
