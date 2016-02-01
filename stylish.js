@@ -17,7 +17,7 @@ function resetState () {
   currTable = []
   filenames = []
   options = undefined
-  optionsRead = false
+  optionsRead = false;
 }
 
 function createSummary (errs, warns, total, maxErrors, maxWarnings) {
