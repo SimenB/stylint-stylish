@@ -16,7 +16,7 @@
     "prelint": "npm run clean",
     "prepublish": "not-in-install && npm run compile || echo this is npm install",
     "pretest": "npm run lint",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-register"
   },
   "repository": "SimenB/stylint-stylish",
   "keywords": [
@@ -42,21 +42,19 @@
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "babel": "^6.1.18",
-    "babel-cli": "^6.1.18",
-    "babel-core": "^6.1.21",
+    "babel-cli": "^6.4.5",
     "babel-istanbul": "^0.6.0",
-    "babel-plugin-add-module-exports": "^0.1.1",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-stage-2": "^6.1.18",
-    "codeclimate-test-reporter": "^0.3.0",
-    "coveralls": "^2.11.4",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "codeclimate-test-reporter": "^0.3.1",
+    "coveralls": "^2.11.6",
     "in-publish": "^2.0.0",
-    "lodash.clonedeep": "^4.0.3",
-    "mocha": "^2.3.3",
-    "rimraf": "^2.4.3",
-    "standard": "^5.3.1",
-    "stylint": "^1.3.2"
+    "lodash.clonedeep": "^4.0.4",
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.1",
+    "standard": "^5.4.1",
+    "stylint": "^1.3.6"
   },
   "peerDependencies": {
     "stylint": ">= 1.0.0"
