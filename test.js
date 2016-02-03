@@ -24,6 +24,8 @@ describe('stylint-stylish', () => {
     stylintInstance.state.strictMode = false
     stylintInstance.config.reporter = require.resolve('./stylish')
     stylintInstance.config.reporterOptions = undefined
+    stylintInstance.config.maxErrors = undefined
+    stylintInstance.config.maxWarnings = undefined
 
     stylintInstance.init()
   })
@@ -67,9 +69,108 @@ describe('stylint-stylish', () => {
     assert.equal(report[10], '')
   })
 
+  it('should log Max Errors if provided', () => {
+    stylintInstance.config.maxErrors = 1
+    stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.errs = ['', '']
+    stylintInstance.cache.warnings = []
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+    stylintInstance.cache.lineNo = 10
+    stylintInstance.state.severity = 'Warning'
+    stylintInstance.reporter('dee')
+
+    var report = stylintInstance.reporter('meh', 'done').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 7)
+    assert.equal(report[0], '')
+    assert.equal(report[1], 'file.styl')
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3].trim(), 'line 10:  dee')
+    assert.equal(report[4], '')
+    assert.equal(report[5].trim(), `${errorIcon}  2 errors (Max Errors: 1)`)
+    assert.equal(report[6], '')
+  })
+
+  it('should log Max Warnings if provided', () => {
+    stylintInstance.config.maxWarnings = 1
+    stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.warnings = ['', '']
+    stylintInstance.cache.errs = []
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+    stylintInstance.cache.lineNo = 10
+    stylintInstance.state.severity = 'Warning'
+    stylintInstance.reporter('dee')
+
+    var report = stylintInstance.reporter('meh', 'done').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 7)
+    assert.equal(report[0], '')
+    assert.equal(report[1], 'file.styl')
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3].trim(), 'line 10:  dee')
+    assert.equal(report[4], '')
+    assert.equal(report[5].trim(), `${warningIcon}  2 warnings (Max Warnings: 1)`)
+    assert.equal(report[6], '')
+  })
+
+  it('should log kill message if provided', () => {
+    stylintInstance.config.maxErrors = 1
+    stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.errs = ['', '']
+    stylintInstance.cache.warnings = []
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+    stylintInstance.cache.lineNo = 10
+    stylintInstance.state.severity = 'Warning'
+    stylintInstance.reporter('dee')
+
+    var report = stylintInstance.reporter('meh', 'done', 'kill').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 8)
+    assert.equal(report[0], '')
+    assert.equal(report[1], 'file.styl')
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3].trim(), 'line 10:  dee')
+    assert.equal(report[4], '')
+    assert.equal(report[5].trim(), `${errorIcon}  2 errors (Max Errors: 1)`)
+    assert.equal(report[6], '')
+  })
+
   it('should report violations with absolute path', () => {
     stylintInstance.config.reporterOptions = { absolutePath: true }
     stylintInstance.cache.file = path.resolve('file.styl')
+    stylintInstance.cache.lineNo = 15
+    stylintInstance.cache.warnings = ['']
+    stylintInstance.state.severity = ''
+    stylintInstance.reporter('woop')
+
+    var report = stylintInstance.reporter('meh', 'done').msg
+
+    report = chalk.stripColor(report).split('\n')
+
+    assert.equal(report.length, 6)
+    assert.equal(report[0], '')
+    assert.equal(report[1], path.join(process.cwd(), 'file.styl'))
+    assert.equal(report[2].trim(), 'line 15:  woop')
+    assert.equal(report[3], '')
+    assert.equal(report[4].trim(), `${warningIcon}  1 warning`)
+    assert.equal(report[5], '')
+  })
+
+  it('should report violations with absolute path with file being relative path', () => {
+    stylintInstance.config.reporterOptions = { absolutePath: true }
+    stylintInstance.cache.file = 'file.styl'
     stylintInstance.cache.lineNo = 15
     stylintInstance.cache.warnings = ['']
     stylintInstance.state.severity = ''
