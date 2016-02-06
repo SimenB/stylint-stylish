@@ -203,7 +203,7 @@ describe('stylint-stylish', () => {
 
     assert.equal(report.length, 6)
     assert.equal(report[0], '')
-    assert.equal(report[1], `file.styl`)
+    assert.equal(report[1], 'file.styl')
     assert.equal(report[2].trim(), 'line 15:  woop')
     assert.equal(report[3], '')
     assert.equal(report[4].trim(), `${errorIcon}  1 error (Max Errors: 0)`)
