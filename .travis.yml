@@ -1,17 +1,29 @@
-language: node_js
-node_js:
-  - node
-  - 4
-  - iojs-3
-  - iojs-2
-  - iojs-1
-  - 0.12
-  - '0.10'
-before_install: npm install -g npm
+language: cpp
+env:
+  - NODE_VERSION="node"
+  - NODE_VERSION="4"
+  - NODE_VERSION="iojs-3"
+  - NODE_VERSION="iojs-2"
+  - NODE_VERSION="iojs-1"
+  - NODE_VERSION="0.12"
+  - NODE_VERSION="0.10"
+os:
+  - linux
+  - osx
+matrix:
+  fast_finish: true
+before_install:
+  - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+  - source ~/.bashrc
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
+  - npm install -g npm
+  - npm install -g codeclimate-test-reporter
+install: npm install
+script: npm run cover
 addons:
   code_climate:
     repo_token: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
-script: npm run cover
 after_success:
   - cat coverage/lcov.info | node_modules/.bin/coveralls --verbose
   - codeclimate-test-reporter < coverage/lcov.info
