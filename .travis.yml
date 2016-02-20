@@ -2,9 +2,6 @@ language: cpp
 env:
   - NODE_VERSION="node"
   - NODE_VERSION="4"
-  - NODE_VERSION="iojs-3"
-  - NODE_VERSION="iojs-2"
-  - NODE_VERSION="iojs-1"
   - NODE_VERSION="0.12"
   - NODE_VERSION="0.10"
 os:
