@@ -56,9 +56,7 @@ function doneHandler (kill) {
   const total = errs + warns
   const msg = table(currTable)
     .split('\n')
-    .map((msg, i) => {
-      return filenames[i] ? `\n${filenames[i]}\n${msg}` : msg
-    })
+    .map((msg, i) => filenames[i] ? `\n${filenames[i]}\n${msg}` : msg)
     .join('\n') + '\n\n'
 
   this.cache.msg = `${msg}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`
