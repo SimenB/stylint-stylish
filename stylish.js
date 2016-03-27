@@ -3,7 +3,6 @@ import pathIsAbsolute from 'path-is-absolute'
 import chalk from 'chalk'
 import logSymbols from 'log-symbols'
 import table from 'text-table'
-import pluralize from 'pluralize'
 import isNumber from 'lodash.isnumber'
 
 let currFile
@@ -28,7 +27,7 @@ function createSummary (errs, warns, total, maxErrors, maxWarnings) {
   let output = ''
 
   if (errs > 0) {
-    output += `  ${logSymbols.error}  ${pluralize('error', errs, true)}`
+    output += `  ${logSymbols.error}  ${errs} ${errs > 1 ? 'errors' : 'error'}`
 
     if (isNumber(maxErrors)) {
       output += ` (Max Errors: ${maxErrors})`
@@ -38,7 +37,7 @@ function createSummary (errs, warns, total, maxErrors, maxWarnings) {
   }
 
   if (warns > 0) {
-    output += `  ${logSymbols.warning}  ${pluralize('warning', warns, true)}`
+    output += `  ${logSymbols.warning}  ${warns} ${warns > 1 ? 'warnings' : 'warning'}`
 
     if (isNumber(maxWarnings)) {
       output += ` (Max Warnings: ${maxWarnings})`
