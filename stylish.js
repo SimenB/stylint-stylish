@@ -98,9 +98,12 @@ export default function (msg, done, kill) {
     filenames[currTable.length] = chalk.underline(filename)
   }
 
+  const column = isNumber(this.cache.col) ? this.cache.col : -1
+
   currTable.push([
     '',
-    chalk.gray(`line ${this.cache.lineNo}:`),
+    chalk.gray(`line ${this.cache.lineNo}`),
+    chalk.gray(column > 0 ? `col ${column}` : '-'),
     isWarning ? chalk.blue(msg) : chalk.red(msg),
     options.verbose ? chalk.gray(this.cache.origLine.trim()) : ''
   ])

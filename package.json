@@ -65,7 +65,7 @@
     "lodash.clonedeep": "^4.3.2",
     "nyc": "^6.4.2",
     "rimraf": "^2.5.2",
-    "stylint": "^1.4.1"
+    "stylint": "^1.5.4"
   },
   "peerDependencies": {
     "stylint": "1.x"
