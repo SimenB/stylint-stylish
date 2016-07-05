@@ -1,112 +1,112 @@
-import path from 'path'
-import pathIsAbsolute from 'path-is-absolute'
-import chalk from 'chalk'
-import logSymbols from 'log-symbols'
-import table from 'text-table'
-import isNumber from 'lodash.isnumber'
+import path from 'path';
+import pathIsAbsolute from 'path-is-absolute';
+import chalk from 'chalk';
+import logSymbols from 'log-symbols';
+import table from 'text-table';
+import isNumber from 'lodash.isnumber';
 
-let currFile
-let currTable = []
-let filenames = []
-let options
-let optionsRead = false
+let currFile;
+let currTable = [];
+let filenames = [];
+let options;
+let optionsRead = false;
 
-function resetState () {
-  currFile = undefined
-  currTable = []
-  filenames = []
-  options = undefined
-  optionsRead = false
+function resetState() {
+  currFile = undefined;
+  currTable = [];
+  filenames = [];
+  options = undefined;
+  optionsRead = false;
 }
 
-function createSummary (errs, warns, total, maxErrors, maxWarnings) {
+function createSummary(errs, warns, total, maxErrors, maxWarnings) {
   if (total === 0) {
-    return 'No violations'
+    return 'No violations';
   }
 
-  let output = ''
+  let output = '';
 
   if (errs > 0) {
-    output += `  ${logSymbols.error}  ${errs} ${errs > 1 ? 'errors' : 'error'}`
+    output += `  ${logSymbols.error}  ${errs} ${errs > 1 ? 'errors' : 'error'}`;
 
     if (isNumber(maxErrors)) {
-      output += ` (Max Errors: ${maxErrors})`
+      output += ` (Max Errors: ${maxErrors})`;
     }
 
-    output += '\n'
+    output += '\n';
   }
 
   if (warns > 0) {
-    output += `  ${logSymbols.warning}  ${warns} ${warns > 1 ? 'warnings' : 'warning'}`
+    output += `  ${logSymbols.warning}  ${warns} ${warns > 1 ? 'warnings' : 'warning'}`;
 
     if (isNumber(maxWarnings)) {
-      output += ` (Max Warnings: ${maxWarnings})`
+      output += ` (Max Warnings: ${maxWarnings})`;
     }
 
-    output += '\n'
+    output += '\n';
   }
 
-  return output
+  return output;
 }
 
-function doneHandler (kill) {
-  const errs = this.cache.errs.length
-  const warns = this.cache.warnings.length
-  const total = errs + warns
-  const msg = table(currTable)
+function doneHandler(kill) {
+  const errs = this.cache.errs.length;
+  const warns = this.cache.warnings.length;
+  const total = errs + warns;
+  const formattedMessage = table(currTable) // eslint-disable-line prefer-template
     .split('\n')
-    .map((msg, i) => filenames[i] ? `\n${filenames[i]}\n${msg}` : msg)
-    .join('\n') + '\n\n'
+    .map((msg, i) => (filenames[i] ? `\n${filenames[i]}\n${msg}` : msg))
+    .join('\n') + '\n\n';
 
-  this.cache.msg = `${msg}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`
+  this.cache.msg = `${formattedMessage}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`;
 
   if (kill === 'kill') {
-    this.cache.msg += '\nStylint: Over Error or Warning Limit.'
+    this.cache.msg += '\nStylint: Over Error or Warning Limit.';
   } else if (total === 0) {
-    this.cache.msg = ''
+    this.cache.msg = '';
   }
 
-  resetState()
+  resetState();
 
-  return this.done()
+  return this.done();
 }
 
 export default function (msg, done, kill) {
   if (done === 'done') {
-    return doneHandler.call(this, kill)
+    return doneHandler.call(this, kill);
   }
 
   if (!optionsRead) {
-    optionsRead = true
+    optionsRead = true;
 
-    const {absolutePath, verbose} = (this.config.reporterOptions || {})
-    options = {absolutePath, verbose}
+    const { absolutePath, verbose } = (this.config.reporterOptions || {});
+    options = { absolutePath, verbose };
   }
 
-  const isWarning = this.state.severity === 'Warning'
+  const isWarning = this.state.severity === 'Warning';
 
   if (currFile !== this.cache.file) {
-    currFile = this.cache.file
-    let filename
+    currFile = this.cache.file;
+    let filename;
 
     if (options.absolutePath) {
-      filename = pathIsAbsolute(currFile) ? currFile : path.resolve(currFile)
+      filename = pathIsAbsolute(currFile) ? currFile : path.resolve(currFile);
     } else {
-      filename = pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile
+      filename = pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile;
     }
 
-    filenames[currTable.length] = chalk.underline(filename)
+    filenames[currTable.length] = chalk.underline(filename);
   }
 
-  const column = isNumber(this.cache.col) ? this.cache.col : -1
+  const column = isNumber(this.cache.col) ? this.cache.col : -1;
 
   currTable.push([
     '',
     chalk.gray(`line ${this.cache.lineNo}`),
     chalk.gray(column > 0 ? `col ${column}` : '-'),
     isWarning ? chalk.blue(msg) : chalk.red(msg),
-    options.verbose ? chalk.gray(this.cache.origLine.trim()) : ''
-  ])
+    options.verbose ? chalk.gray(this.cache.origLine.trim()) : '',
+  ]);
 
-  return ''
+  return '';
 }

@@ -1,19 +1,20 @@
 {
-  "extends": "standard",
+  "extends": "airbnb-base",
   "plugins": ["ava"],
   "rules": {
-    "arrow-parens": [2, "as-needed"],
-    "ava/no-cb-test": 2,
-    "ava/no-identical-title": 2,
-    "ava/no-invalid-end": 2,
-    "ava/no-only-test": 2,
-    "ava/no-skip-assert": 2,
-    "ava/no-skip-test": 2,
-    "ava/no-todo-test": 1,
-    "ava/prefer-power-assert": 2,
-    "ava/test-ended": 2,
-    "ava/test-title": [2, "always"],
-    "ava/use-t": 2,
-    "ava/use-test": 2
+    "arrow-parens": ["error", "as-needed"],
+    "max-len": ["error", 140],
+    "ava/no-cb-test": "error",
+    "ava/no-identical-title": "error",
+    "ava/no-invalid-end": "error",
+    "ava/no-only-test": "error",
+    "ava/no-skip-assert": "error",
+    "ava/no-skip-test": "error",
+    "ava/no-todo-test": "warn",
+    "ava/prefer-power-assert": "error",
+    "ava/test-ended": "error",
+    "ava/test-title": ["error", "always"],
+    "ava/use-t": "error",
+    "ava/use-test": "error"
   }
 }
