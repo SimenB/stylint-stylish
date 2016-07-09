@@ -53,10 +53,10 @@ function doneHandler(kill) {
   const errs = this.cache.errs.length;
   const warns = this.cache.warnings.length;
   const total = errs + warns;
-  const formattedMessage = table(currTable) // eslint-disable-line prefer-template
+  const formattedMessage = `${table(currTable)
     .split('\n')
     .map((msg, i) => (filenames[i] ? `\n${filenames[i]}\n${msg}` : msg))
-    .join('\n') + '\n\n';
+    .join('\n')}\n\n`;
 
   this.cache.msg = `${formattedMessage}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`;
 
