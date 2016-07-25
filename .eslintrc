@@ -4,6 +4,7 @@
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "max-len": ["error", 140],
+    "linebreak-style": "off",
     "ava/no-cb-test": "error",
     "ava/no-identical-title": "error",
     "ava/no-invalid-end": "error",
