@@ -69,5 +69,10 @@
   },
   "peerDependencies": {
     "stylint": "1.x"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
   }
 }

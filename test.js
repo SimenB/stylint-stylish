@@ -12,8 +12,6 @@ import origState from 'stylint/src/core/state';
 
 import test from 'ava';
 
-import 'babel-register';
-
 const errorIcon = chalk.stripColor(logSymbols.error);
 const warningIcon = chalk.stripColor(logSymbols.warning);
 
