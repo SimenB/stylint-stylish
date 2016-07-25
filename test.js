@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq, no-param-reassign */
+/* eslint-disable no-param-reassign */
 /* eslint import/no-extraneous-dependencies: ["error", { "devDependencies": true }] */
 
 import chalk from 'chalk';
@@ -39,7 +39,7 @@ test.beforeEach('before', t => {
 test('should report if all green', t => {
   const report = t.context.stylintInstance.reporter('meh', 'done').msg;
 
-  t.truthy(report == '');
+  t.true(report === '');
 });
 
 test('should report violations', t => {
@@ -61,18 +61,18 @@ test('should report violations', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 11);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3].trim() == 'line 10  -  dee');
-  t.truthy(report[4] == '');
-  t.truthy(report[5] == 'meep.styl');
-  t.truthy(report[6].trim() == 'line 15  -  doo');
-  t.truthy(report[7] == '');
-  t.truthy(report[8].trim() == `${errorIcon}  2 errors`);
-  t.truthy(report[9].trim() == `${warningIcon}  1 warning`);
-  t.truthy(report[10] == '');
+  t.true(report.length === 11);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3].trim() === 'line 10  -  dee');
+  t.true(report[4] === '');
+  t.true(report[5] === 'meep.styl');
+  t.true(report[6].trim() === 'line 15  -  doo');
+  t.true(report[7] === '');
+  t.true(report[8].trim() === `${errorIcon}  2 errors`);
+  t.true(report[9].trim() === `${warningIcon}  1 warning`);
+  t.true(report[10] === '');
 });
 
 test('should log Max Errors if provided', t => {
@@ -91,14 +91,14 @@ test('should log Max Errors if provided', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 7);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3].trim() == 'line 10  -  dee');
-  t.truthy(report[4] == '');
-  t.truthy(report[5].trim() == `${errorIcon}  2 errors (Max Errors: 1)`);
-  t.truthy(report[6] == '');
+  t.true(report.length === 7);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3].trim() === 'line 10  -  dee');
+  t.true(report[4] === '');
+  t.true(report[5].trim() === `${errorIcon}  2 errors (Max Errors: 1)`);
+  t.true(report[6] === '');
 });
 
 test('should log Max Warnings if provided', t => {
@@ -117,14 +117,14 @@ test('should log Max Warnings if provided', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 7);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3].trim() == 'line 10  -  dee');
-  t.truthy(report[4] == '');
-  t.truthy(report[5].trim() == `${warningIcon}  2 warnings (Max Warnings: 1)`);
-  t.truthy(report[6] == '');
+  t.true(report.length === 7);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3].trim() === 'line 10  -  dee');
+  t.true(report[4] === '');
+  t.true(report[5].trim() === `${warningIcon}  2 warnings (Max Warnings: 1)`);
+  t.true(report[6] === '');
 });
 
 test('should log kill message if provided', t => {
@@ -143,14 +143,14 @@ test('should log kill message if provided', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 8);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3].trim() == 'line 10  -  dee');
-  t.truthy(report[4] == '');
-  t.truthy(report[5].trim() == `${errorIcon}  2 errors (Max Errors: 1)`);
-  t.truthy(report[6] == '');
+  t.true(report.length === 8);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3].trim() === 'line 10  -  dee');
+  t.true(report[4] === '');
+  t.true(report[5].trim() === `${errorIcon}  2 errors (Max Errors: 1)`);
+  t.true(report[6] === '');
 });
 
 test('should report violations with absolute path', t => {
@@ -165,13 +165,13 @@ test('should report violations with absolute path', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 6);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == path.join(process.cwd(), 'file.styl'));
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3] == '');
-  t.truthy(report[4].trim() == `${warningIcon}  1 warning`);
-  t.truthy(report[5] == '');
+  t.true(report.length === 6);
+  t.true(report[0] === '');
+  t.true(report[1] === path.join(process.cwd(), 'file.styl'));
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3] === '');
+  t.true(report[4].trim() === `${warningIcon}  1 warning`);
+  t.true(report[5] === '');
 });
 
 test('should report violations with absolute path with file being relative path', t => {
@@ -186,13 +186,13 @@ test('should report violations with absolute path with file being relative path'
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 6);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == path.join(process.cwd(), 'file.styl'));
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3] == '');
-  t.truthy(report[4].trim() == `${warningIcon}  1 warning`);
-  t.truthy(report[5] == '');
+  t.true(report.length === 6);
+  t.true(report[0] === '');
+  t.true(report[1] === path.join(process.cwd(), 'file.styl'));
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3] === '');
+  t.true(report[4].trim() === `${warningIcon}  1 warning`);
+  t.true(report[5] === '');
 });
 
 test('should report violations with max errors', t => {
@@ -207,13 +207,13 @@ test('should report violations with max errors', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 6);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop');
-  t.truthy(report[3] == '');
-  t.truthy(report[4].trim() == `${errorIcon}  1 error (Max Errors: 0)`);
-  t.truthy(report[5] == '');
+  t.true(report.length === 6);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop');
+  t.true(report[3] === '');
+  t.true(report[4].trim() === `${errorIcon}  1 error (Max Errors: 0)`);
+  t.true(report[5] === '');
 });
 
 test('should report original line if verbose', t => {
@@ -230,13 +230,13 @@ test('should report original line if verbose', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 6);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  -  woop  beep boop moop');
-  t.truthy(report[3] == '');
-  t.truthy(report[4].trim() == `${warningIcon}  1 warning`);
-  t.truthy(report[5] == '');
+  t.true(report.length === 6);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -  woop  beep boop moop');
+  t.true(report[3] === '');
+  t.true(report[4].trim() === `${warningIcon}  1 warning`);
+  t.true(report[5] === '');
 });
 
 test('should report violations with column if available', t => {
@@ -261,16 +261,16 @@ test('should report violations with column if available', t => {
 
   report = chalk.stripColor(report).split('\n');
 
-  t.truthy(report.length == 11);
-  t.truthy(report[0] == '');
-  t.truthy(report[1] == 'file.styl');
-  t.truthy(report[2].trim() == 'line 15  col 10  woop');
-  t.truthy(report[3].trim() == 'line 10  col 25  dee');
-  t.truthy(report[4] == '');
-  t.truthy(report[5] == 'meep.styl');
-  t.truthy(report[6].trim() == 'line 15  col 42  doo');
-  t.truthy(report[7] == '');
-  t.truthy(report[8].trim() == `${errorIcon}  2 errors`);
-  t.truthy(report[9].trim() == `${warningIcon}  1 warning`);
-  t.truthy(report[10] == '');
+  t.true(report.length === 11);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  col 10  woop');
+  t.true(report[3].trim() === 'line 10  col 25  dee');
+  t.true(report[4] === '');
+  t.true(report[5] === 'meep.styl');
+  t.true(report[6].trim() === 'line 15  col 42  doo');
+  t.true(report[7] === '');
+  t.true(report[8].trim() === `${errorIcon}  2 errors`);
+  t.true(report[9].trim() === `${warningIcon}  1 warning`);
+  t.true(report[10] === '');
 });
