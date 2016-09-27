@@ -104,7 +104,7 @@ export default function (msg, done, kill) {
     '',
     chalk.gray(`line ${this.cache.lineNo}`),
     chalk.gray(column > 0 ? `col ${column}` : '-'),
-    isWarning ? chalk.blue(msg) : chalk.red(msg),
+    isWarning ? chalk.yellow(msg) : chalk.red(msg),
     options.verbose ? chalk.gray(this.cache.origLine.trim()) : '',
   ]);
 
