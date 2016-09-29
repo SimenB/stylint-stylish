@@ -61,6 +61,11 @@ Type: `boolean`, default: `false`
 
 When printing out a filename, print the absolute path instead of a relative one
 
+#### `ruleName`
+Type: `boolean`, default: `false`
+
+When printing out a violation, Include the name of the rule at the end
+
 
 [travis-url]: https://travis-ci.org/SimenB/stylint-stylish
 [travis-image]: https://img.shields.io/travis/SimenB/stylint-stylish.svg
