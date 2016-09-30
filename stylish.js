@@ -79,8 +79,8 @@ export default function (msg, done, kill) {
   if (!optionsRead) {
     optionsRead = true;
 
-    const { absolutePath, verbose } = (this.config.reporterOptions || {});
-    options = { absolutePath, verbose };
+    const { absolutePath, verbose, ruleName } = (this.config.reporterOptions || {});
+    options = { absolutePath, verbose, ruleName };
   }
 
   const isWarning = this.state.severity === 'Warning';
@@ -99,12 +99,13 @@ export default function (msg, done, kill) {
   }
 
   const column = isNumber(this.cache.col) ? this.cache.col : -1;
+  const rule = options.ruleName ? chalk.gray(this.cache.rule || '') : '';
 
   currTable.push([
     '',
     chalk.gray(`line ${this.cache.lineNo}`),
-    chalk.gray(column > 0 ? `col ${column}` : '-'),
-    isWarning ? chalk.yellow(msg) : chalk.red(msg),
+    chalk.gray(column >= 0 ? `col ${column}` : '-'),
+    `${isWarning ? chalk.yellow(msg) : chalk.red(msg)} ${rule}`.trim(),
     options.verbose ? chalk.gray(this.cache.origLine.trim()) : '',
   ]);
 

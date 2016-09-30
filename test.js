@@ -241,12 +241,14 @@ test('should report violations with column if available', t => {
   t.context.stylintInstance.cache.file = path.resolve('file.styl');
   t.context.stylintInstance.cache.col = 10;
   t.context.stylintInstance.cache.lineNo = 15;
+  t.context.stylintInstance.cache.rule = 'some rule';
   t.context.stylintInstance.cache.errs = ['', ''];
   t.context.stylintInstance.cache.warnings = [''];
   t.context.stylintInstance.state.severity = '';
   t.context.stylintInstance.reporter('woop');
   t.context.stylintInstance.cache.lineNo = 10;
   t.context.stylintInstance.cache.col = 25;
+  t.context.stylintInstance.cache.rule = 'some other rule';
   t.context.stylintInstance.state.severity = 'Warning';
   t.context.stylintInstance.reporter('dee');
   t.context.stylintInstance.cache.file = 'meep.styl';
@@ -264,6 +266,44 @@ test('should report violations with column if available', t => {
   t.true(report[1] === 'file.styl');
   t.true(report[2].trim() === 'line 15  col 10  woop');
   t.true(report[3].trim() === 'line 10  col 25  dee');
+  t.true(report[4] === '');
+  t.true(report[5] === 'meep.styl');
+  t.true(report[6].trim() === 'line 15  col 42  doo');
+  t.true(report[7] === '');
+  t.true(report[8].trim() === `${errorIcon}  2 errors`);
+  t.true(report[9].trim() === `${warningIcon}  1 warning`);
+  t.true(report[10] === '');
+});
+
+test('should report violations with rule name if option active', t => {
+  t.context.stylintInstance.config.reporterOptions = { ruleName: true };
+  t.context.stylintInstance.cache.file = path.resolve('file.styl');
+  t.context.stylintInstance.cache.lineNo = 15;
+  t.context.stylintInstance.cache.rule = 'some rule';
+  t.context.stylintInstance.cache.errs = ['', ''];
+  t.context.stylintInstance.cache.warnings = [''];
+  t.context.stylintInstance.state.severity = '';
+  t.context.stylintInstance.reporter('woop');
+  t.context.stylintInstance.cache.lineNo = 10;
+  t.context.stylintInstance.cache.rule = 'some other rule';
+  t.context.stylintInstance.state.severity = 'Warning';
+  t.context.stylintInstance.reporter('dee');
+  t.context.stylintInstance.cache.file = 'meep.styl';
+  t.context.stylintInstance.cache.lineNo = 15;
+  t.context.stylintInstance.cache.col = 42;
+  t.context.stylintInstance.cache.rule = null;
+  t.context.stylintInstance.state.severity = '';
+  t.context.stylintInstance.reporter('doo');
+
+  let report = t.context.stylintInstance.reporter('meh', 'done').msg;
+
+  report = chalk.stripColor(report).split('\n');
+
+  t.true(report.length === 11);
+  t.true(report[0] === '');
+  t.true(report[1] === 'file.styl');
+  t.true(report[2].trim() === 'line 15  -       woop some rule');
+  t.true(report[3].trim() === 'line 10  -       dee some other rule');
   t.true(report[4] === '');
   t.true(report[5] === 'meep.styl');
   t.true(report[6].trim() === 'line 15  col 42  doo');
