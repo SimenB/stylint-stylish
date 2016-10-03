@@ -55,7 +55,7 @@
     "babel-plugin-transform-es2015-shorthand-properties": "^6.8.0",
     "babel-plugin-transform-es2015-template-literals": "^6.8.0",
     "babel-register": "^6.16.3",
-    "codeclimate-test-reporter": "^0.3.3",
+    "codeclimate-test-reporter": "^0.4.0",
     "coveralls": "^2.11.14",
     "eslint": "^3.6.1",
     "eslint-config-simenb-ava": "^2.0.3",
