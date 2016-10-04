@@ -57,7 +57,7 @@
     "babel-register": "^6.16.3",
     "codeclimate-test-reporter": "^0.4.0",
     "coveralls": "^2.11.14",
-    "eslint": "^3.6.1",
+    "eslint": "^3.7.1",
     "eslint-config-simenb-ava": "^2.0.3",
     "eslint-config-simenb-base": "^3.0.0",
     "in-publish": "^2.0.0",
