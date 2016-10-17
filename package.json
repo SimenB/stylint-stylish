@@ -59,7 +59,7 @@
     "coveralls": "^2.11.14",
     "eslint": "^3.6.1",
     "eslint-config-simenb-ava": "^3.0.0",
-    "eslint-config-simenb-base": "^5.0.0",
+    "eslint-config-simenb-base": "^7.0.0",
     "in-publish": "^2.0.0",
     "lodash.clonedeep": "^4.5.0",
     "node-version-check": "^2.1.1",
