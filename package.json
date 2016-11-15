@@ -63,7 +63,7 @@
     "in-publish": "^2.0.0",
     "lodash.clonedeep": "^4.5.0",
     "node-version-check": "^2.1.1",
-    "nyc": "^8.4.0",
+    "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
     "stylint": "^1.5.7"
   },
