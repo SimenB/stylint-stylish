@@ -58,7 +58,7 @@
     "codeclimate-test-reporter": "^0.4.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.10.2",
-    "eslint-config-simenb-ava": "^6.0.0",
+    "eslint-config-simenb-ava": "^6.0.1",
     "eslint-config-simenb-base": "^8.0.0",
     "in-publish": "^2.0.0",
     "lodash.clonedeep": "^4.5.0",
