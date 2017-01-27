@@ -11,6 +11,7 @@
 [![Dependency Status][david-image]][david-url]
 [![Dev Dependency Status][david-dev-image]][david-dev-url]
 [![Peer Dependency Status][david-peer-image]][david-peer-url]
+[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 ## Screenshots
 ![This reporter][new-image]
@@ -81,9 +82,11 @@ When printing out a violation, Include the name of the rule at the end
 [bithound-image]: https://www.bithound.io/github/SimenB/stylint-stylish/badges/dependencies.svg
 [david-url]: https://david-dm.org/SimenB/stylint-stylish
 [david-image]: https://img.shields.io/david/SimenB/stylint-stylish.svg
-[david-dev-url]: https://david-dm.org/SimenB/stylint-stylish#info=devDependencies
+[david-dev-url]: https://david-dm.org/SimenB/stylint-stylish?type=dev
 [david-dev-image]: https://img.shields.io/david/dev/SimenB/stylint-stylish.svg
-[david-peer-url]: https://david-dm.org/SimenB/stylint-stylish#info=peerDependencies
+[david-peer-url]: https://david-dm.org/SimenB/stylint-stylish?type=peer
 [david-peer-image]: https://img.shields.io/david/peer/SimenB/stylint-stylish.svg
+[greenkeeper-url]: https://greenkeeper.io/
+[greenkeeper-image]: https://badges.greenkeeper.io/SimenB/stylint-stylish.svg
 [new-image]: screenshots/this.png
 [orig-image]: screenshots/original.png
