@@ -959,16 +959,16 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-airbnb-base@^11.0.0:
+eslint-config-airbnb-base@^11.1.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-11.1.0.tgz#dc9b3ec70b8c74dcbe6d6257c9da3992c39ca2ca"
 
-eslint-config-simenb-base@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-simenb-base/-/eslint-config-simenb-base-9.0.0.tgz#54526df0448dc28702085fefac25164f6a8f73e2"
+eslint-config-simenb-base@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-simenb-base/-/eslint-config-simenb-base-10.0.0.tgz#d90597b5e188d8a034d2e16606df0da50f5ee5f5"
   dependencies:
-    eslint-config-airbnb-base "^11.0.0"
-    eslint-plugin-import "^2.1.0"
+    eslint-config-airbnb-base "^11.1.0"
+    eslint-plugin-import "^2.2.0"
 
 eslint-import-resolver-node@^0.2.0:
   version "0.2.3"
@@ -985,7 +985,7 @@ eslint-module-utils@^2.0.0:
     debug "2.2.0"
     pkg-dir "^1.0.0"
 
-eslint-plugin-import@^2.1.0:
+eslint-plugin-import@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.2.0.tgz#72ba306fad305d67c4816348a4699a4229ac8b4e"
   dependencies:
