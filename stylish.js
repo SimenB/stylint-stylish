@@ -55,7 +55,7 @@ function doneHandler(kill) {
   const total = errs + warns;
   const formattedMessage = `${table(currTable)
     .split('\n')
-    .map((msg, i) => (filenames[i] ? `\n${filenames[i]}\n${msg}` : msg))
+    .map((msg, i) => filenames[i] ? `\n${filenames[i]}\n${msg}` : msg)
     .join('\n')}\n\n`;
 
   this.cache.msg = `${formattedMessage}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`;
@@ -71,7 +71,7 @@ function doneHandler(kill) {
   return this.done();
 }
 
-export default function (msg, done, kill) {
+export default function(msg, done, kill) {
   if (done === 'done') {
     return doneHandler.call(this, kill);
   }
@@ -79,7 +79,7 @@ export default function (msg, done, kill) {
   if (!optionsRead) {
     optionsRead = true;
 
-    const { absolutePath, verbose, ruleName } = (this.config.reporterOptions || {});
+    const { absolutePath, verbose, ruleName } = this.config.reporterOptions || {};
     options = { absolutePath, verbose, ruleName };
   }
 
