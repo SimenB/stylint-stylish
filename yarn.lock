@@ -890,8 +890,8 @@ ecc-jsbn@~0.1.1:
     prr "~0.0.0"
 
 error-ex@^1.2.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/error-ex/-/error-ex-1.3.0.tgz#e67b43f3e82c96ea3a584ffee0b9fc3325d802d9"
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/error-ex/-/error-ex-1.3.1.tgz#f855a86ce61adc4e8621c3cda21e7a7612c3a8dc"
   dependencies:
     is-arrayish "^0.2.1"
 
@@ -976,14 +976,14 @@ eslint-config-airbnb-base@^11.1.0:
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-11.1.1.tgz#61e9e89e4eb89f474f6913ac817be9fbb59063e0"
 
 eslint-config-prettier@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-1.4.1.tgz#f67b446fd70e3be5060f960fec3ab357d0a66a8d"
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-1.5.0.tgz#969b6d21b2eb2574a6810426507f755072db1963"
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-simenb-base@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-simenb-base/-/eslint-config-simenb-base-11.0.1.tgz#ce0590e2a939833560c161f2b96c236bd6b6cbf9"
+eslint-config-simenb-base@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-simenb-base/-/eslint-config-simenb-base-12.0.0.tgz#8356bc9579c0957ff118127c32ba561abf81d00a"
   dependencies:
     eslint-config-airbnb-base "^11.1.0"
     eslint-config-prettier "^1.4.1"
@@ -1027,8 +1027,8 @@ eslint-plugin-prettier@^2.0.1:
     requireindex "~1.1.0"
 
 eslint@^3.12.2:
-  version "3.16.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.16.1.tgz#9bc31fc7341692cf772e80607508f67d711c5609"
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.17.0.tgz#e2704b09c5bae9fb49ee8bafeea3832c7257d498"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
