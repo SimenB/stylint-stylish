@@ -58,7 +58,13 @@ function doneHandler(kill) {
     .map((msg, i) => (filenames[i] ? `\n${filenames[i]}\n${msg}` : msg))
     .join('\n')}\n\n`;
 
-  this.cache.msg = `${formattedMessage}${createSummary(errs, warns, total, this.config.maxErrors, this.config.maxWarnings)}`;
+  this.cache.msg = `${formattedMessage}${createSummary(
+    errs,
+    warns,
+    total,
+    this.config.maxErrors,
+    this.config.maxWarnings
+  )}`;
 
   if (kill === 'kill') {
     this.cache.msg += '\nStylint: Over Error or Warning Limit.';
