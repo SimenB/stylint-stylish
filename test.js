@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-env jest */
 
-import chalk from 'chalk';
+import stripAnsi from 'strip-ansi';
 import logSymbols from 'log-symbols';
 
 import stylint from 'stylint';
@@ -10,8 +10,8 @@ import clone from 'lodash.clonedeep';
 import origCache from 'stylint/src/core/cache';
 import origState from 'stylint/src/core/state';
 
-const errorIcon = chalk.stripColor(logSymbols.error);
-const warningIcon = chalk.stripColor(logSymbols.warning);
+const errorIcon = stripAnsi(logSymbols.error);
+const warningIcon = stripAnsi(logSymbols.warning);
 
 let stylintInstance;
 
@@ -55,7 +55,7 @@ test('should report violations', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(11);
   expect(report[0]).toEqual('');
@@ -85,7 +85,7 @@ test('should log Max Errors if provided', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(7);
   expect(report[0]).toEqual('');
@@ -111,7 +111,7 @@ test('should log Max Warnings if provided', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(7);
   expect(report[0]).toEqual('');
@@ -137,7 +137,7 @@ test('should log kill message if provided', () => {
 
   let report = stylintInstance.reporter('meh', 'done', 'kill').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(8);
   expect(report[0]).toEqual('');
@@ -159,7 +159,7 @@ test('should report violations with absolute path', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(6);
   expect(report[0]).toEqual('');
@@ -180,7 +180,7 @@ test('should report violations with absolute path with file being relative path'
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(6);
   expect(report[0]).toEqual('');
@@ -201,7 +201,7 @@ test('should report violations with max errors', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(6);
   expect(report[0]).toEqual('');
@@ -224,7 +224,7 @@ test('should report original line if verbose', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(6);
   expect(report[0]).toEqual('');
@@ -257,7 +257,7 @@ test('should report violations with column if available', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(11);
   expect(report[0]).toEqual('');
@@ -295,7 +295,7 @@ test('should report violations with rule name if option active', () => {
 
   let report = stylintInstance.reporter('meh', 'done').msg;
 
-  report = chalk.stripColor(report).split('\n');
+  report = stripAnsi(report).split('\n');
 
   expect(report.length).toEqual(11);
   expect(report[0]).toEqual('');
