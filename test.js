@@ -119,7 +119,9 @@ test('should log Max Warnings if provided', () => {
   expect(report[2].trim()).toEqual('line 15  -  woop');
   expect(report[3].trim()).toEqual('line 10  -  dee');
   expect(report[4]).toEqual('');
-  expect(report[5].trim()).toEqual(`${warningIcon}  2 warnings (Max Warnings: 1)`);
+  expect(report[5].trim()).toEqual(
+    `${warningIcon}  2 warnings (Max Warnings: 1)`
+  );
   expect(report[6]).toEqual('');
 });
 

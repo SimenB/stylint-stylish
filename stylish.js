@@ -37,7 +37,9 @@ function createSummary(errs, warns, total, maxErrors, maxWarnings) {
   }
 
   if (warns > 0) {
-    output += `  ${logSymbols.warning}  ${warns} ${warns > 1 ? 'warnings' : 'warning'}`;
+    output += `  ${logSymbols.warning}  ${warns} ${warns > 1
+      ? 'warnings'
+      : 'warning'}`;
 
     if (isNumber(maxWarnings)) {
       output += ` (Max Warnings: ${maxWarnings})`;
@@ -85,7 +87,8 @@ export default function(msg, done, kill) {
   if (!optionsRead) {
     optionsRead = true;
 
-    const { absolutePath, verbose, ruleName } = this.config.reporterOptions || {};
+    const { absolutePath, verbose, ruleName } =
+      this.config.reporterOptions || {};
     options = { absolutePath, verbose, ruleName };
   }
 
@@ -98,7 +101,9 @@ export default function(msg, done, kill) {
     if (options.absolutePath) {
       filename = pathIsAbsolute(currFile) ? currFile : path.resolve(currFile);
     } else {
-      filename = pathIsAbsolute(currFile) ? path.relative(process.cwd(), currFile) : currFile;
+      filename = pathIsAbsolute(currFile)
+        ? path.relative(process.cwd(), currFile)
+        : currFile;
     }
 
     filenames[currTable.length] = chalk.underline(filename);
