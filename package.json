@@ -1,6 +1,6 @@
 {
   "name": "stylint-stylish",
-  "version": "1.4.0",
+  "version": "0.0.0-development",
   "description": "A stylish reporter for Stylint, heavily inspired by jshint-stylish",
   "main": "index.js",
   "files": [
@@ -60,8 +60,10 @@
     "jest": "^22.1.4",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
+    "semantic-release": "^12.2.2",
     "strip-ansi": "^4.0.0",
-    "stylint": "^1.5.9"
+    "stylint": "^1.5.9",
+    "travis-deploy-once": "^4.3.2"
   },
   "peerDependencies": {
     "stylint": "1.x"

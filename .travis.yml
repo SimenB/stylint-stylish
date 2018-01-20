@@ -1,24 +1,33 @@
 language: node_js
 node_js:
-  - stable
-  - 8
-  - 6
-  - 4
+- stable
+- 8
+- 6
+- 4
 os:
-  - linux
-  - osx
+- linux
+- osx
 osx_image: xcode7.3
 matrix:
   fast_finish: true
 install: yarn --ignore-engines
 script: yarn run travis
+jobs:
+  include:
+  - stage: release
+    node_js: 8
+    os: linux
+    after_success: yarn travis-deploy-once "yarn semantic-release"
 addons:
   code_climate:
     repo_token: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
 cache: yarn
 after_success:
-  - cat coverage/lcov.info | node_modules/.bin/coveralls --verbose
-  - codeclimate-test-reporter < coverage/lcov.info
+- cat coverage/lcov.info | node_modules/.bin/coveralls --verbose
+- codeclimate-test-reporter < coverage/lcov.info
 env:
   global:
   - GK_LOCK_YARN_OPTS="--ignore-engines"
+  - BUILD_LEADER_ID=7
+  - secure: RWe6N3dirPomlXFZzr0FzRvDGs9e8NIEVoPExSS31cBu3YRRuXfdZJ4xBA2SaWYRkxJew3FPN8rESt266kJuotRwu6wr9OaXS1ECG6C6KBcJOdruuWEzReFxbTDfL2kkUydZpufKrmeZPHuvMo2hVSz+JVxwUD+DGOLTnn/uDJMoG48BX8qMIBNSPMWc0ahMxVvC0/B6TyOPNQvY4gqDagkw2tNAzzuTjdL2PGq18kMqytgYsSNC3o30zJxQVVgZu2NfHZc63UJmAHNU9tOO7VzZjJztGCoy33XN6Dlmfqul/yyJs9nwG5Cs+SSlJlGHnGXxq9nCko3ELHWoFL99O6gt+wQpZ31yRq+369+1E9joQX5Ox1Gsm0QNZFzC2kCBYKthmF+MfYzNbanmY64UuNSr9ajgYwkPbuoWP+wd7rIJFEUYWVCzEnFiyy0VnTkO/LSGuiN2XoWCTjSnUygECJxvz2Rn99SzegIic5itQLebSGuwIvnQbZ2DkYR09UfWwqJke/RenLxZqwT4NfzKrY+3yNa3PqZPO3oPsboilkE/9an2SAHP7PD1Q/+gIQJi+4jrJtJu6MJt9tGjhOrEyAmrOyu7GiZv/4WFLCxGC93OiAuW0YObGfKtg7nOlgQwyvdg14QBucGN6IrQOqeNxYf6QV7LtYa0fcWg78vZYQQ=
+  - secure: mVfhV69cDbmjV1vegOJQCgVhbURqMZ0OcDYtmc3V494cz5ddkhTL5iHEM/butszO7N7UHBrUP0fuhKhLVCe7Opc774uedymTgRp8cjOtGk7KDsCxl7sWOrUWYS7hYw96EVB6qCIWYyJ3jFUvIIdEHqRRYusmLKO5SMDFTggcuJie20UwUPnf37D3IN+ZSR3vPUBpho1x27frdXivcl2tchcAv6t3iGNiXoHkvBZDxONO5tUzuo9SLrT413NSWIAcsPy5MUCPVsTWKgOEqdPsjO7ESSaXvogD2iRg588ZYjOJ+X9Bm7a+K+mRCk8/4Ijb00rwVLWc6TjsSRdtjBFbiA9ps4SMPgrQQxY1dBeZGbJjy/ImxMcJphoF+ji6ya0RYYaNdcWgq8jDYomPun6S0Z4D2wfIPA3HPVnaW50AQsNCrud6jQ2cu7OeRxmEH116OE5IpOo1Pc6dBDU2d451N4GIu67yHu4LFsuOJVHv3IICDEVL+713ZWzDX8xoUiIxn8rVzdoBEs3UoIb8kYCXNNaM3hoGBJxVKdJyiu6xw3sYoqLGdjR+bUjgzkwHh5oY5Tf+AVlgxBT887aw4o2MM3aX4uV04QoBUlgYbjHJXIvbHAcrVNXyjlsaqGyslODYEfAaPswCPY0B8F0eB1ZfJckpDQ0RX/7BwEYg+9sPufM=
