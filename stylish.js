@@ -37,9 +37,9 @@ function createSummary(errs, warns, total, maxErrors, maxWarnings) {
   }
 
   if (warns > 0) {
-    output += `  ${logSymbols.warning}  ${warns} ${warns > 1
-      ? 'warnings'
-      : 'warning'}`;
+    output += `  ${logSymbols.warning}  ${warns} ${
+      warns > 1 ? 'warnings' : 'warning'
+    }`;
 
     if (isNumber(maxWarnings)) {
       output += ` (Max Warnings: ${maxWarnings})`;
