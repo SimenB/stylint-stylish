@@ -60,7 +60,7 @@
     "jest": "^22.1.4",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
-    "semantic-release": "^12.2.2",
+    "semantic-release": "^15.0.2",
     "strip-ansi": "^4.0.0",
     "stylint": "^1.5.9",
     "travis-deploy-once": "^4.3.2"
