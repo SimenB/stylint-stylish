@@ -9,14 +9,14 @@
   "scripts": {
     "clean": "del-cli coverage/ index.js",
     "compile": "babel stylish.js -o index.js",
-    "cover": "jest --coverage",
+    "cover": "jest --forceExit --coverage",
     "lint": "eslint .",
     "pretravis": "npm run lint",
     "precover": "npm run clean",
     "prepublish": "not-in-install && npm run compile || in-install",
     "postpublish": "git push --follow-tags",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "jest --forceExit",
     "travis": "npm run cover"
   },
   "repository": "SimenB/stylint-stylish",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-transform-es2015-arrow-functions": "^6.8.0",
     "babel-plugin-transform-es2015-block-scoping": "^6.18.0",
     "babel-plugin-transform-es2015-destructuring": "^6.19.0",
@@ -54,16 +54,16 @@
     "codeclimate-test-reporter": "^0.5.0",
     "coveralls": "^3.0.0",
     "del-cli": "^1.0.0",
-    "eslint": "^4.3.0",
-    "eslint-config-simenb-base": "^14.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-simenb-base": "^15.0.0",
     "in-publish": "^2.0.0",
-    "jest": "^22.1.4",
+    "jest": "^23.6.0",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
     "semantic-release": "^15.0.2",
     "strip-ansi": "^4.0.0",
     "stylint": "^1.5.9",
-    "travis-deploy-once": "^4.3.2"
+    "travis-deploy-once": "^5.0.7"
   },
   "peerDependencies": {
     "stylint": "1.x"
