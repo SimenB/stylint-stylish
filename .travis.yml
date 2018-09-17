@@ -12,9 +12,11 @@ script: yarn run travis
 jobs:
   include:
   - stage: release
-    node_js: 8
-    os: linux
-    after_success: yarn travis-deploy-once "yarn semantic-release"
+    node_js: lts/*
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: npx semantic-release@15
 addons:
   code_climate:
     repo_token: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
@@ -22,9 +24,12 @@ cache: yarn
 after_success:
 - cat coverage/lcov.info | node_modules/.bin/coveralls --verbose
 - codeclimate-test-reporter < coverage/lcov.info
+branches:
+  only:
+  - master
+  - "/^greenkeeper/.*$/"
+  except:
+  - /^v\d+\.\d+\.\d+$/
 env:
   global:
   - GK_LOCK_YARN_OPTS="--ignore-engines"
-  - BUILD_LEADER_ID=5
-  - secure: mVfhV69cDbmjV1vegOJQCgVhbURqMZ0OcDYtmc3V494cz5ddkhTL5iHEM/butszO7N7UHBrUP0fuhKhLVCe7Opc774uedymTgRp8cjOtGk7KDsCxl7sWOrUWYS7hYw96EVB6qCIWYyJ3jFUvIIdEHqRRYusmLKO5SMDFTggcuJie20UwUPnf37D3IN+ZSR3vPUBpho1x27frdXivcl2tchcAv6t3iGNiXoHkvBZDxONO5tUzuo9SLrT413NSWIAcsPy5MUCPVsTWKgOEqdPsjO7ESSaXvogD2iRg588ZYjOJ+X9Bm7a+K+mRCk8/4Ijb00rwVLWc6TjsSRdtjBFbiA9ps4SMPgrQQxY1dBeZGbJjy/ImxMcJphoF+ji6ya0RYYaNdcWgq8jDYomPun6S0Z4D2wfIPA3HPVnaW50AQsNCrud6jQ2cu7OeRxmEH116OE5IpOo1Pc6dBDU2d451N4GIu67yHu4LFsuOJVHv3IICDEVL+713ZWzDX8xoUiIxn8rVzdoBEs3UoIb8kYCXNNaM3hoGBJxVKdJyiu6xw3sYoqLGdjR+bUjgzkwHh5oY5Tf+AVlgxBT887aw4o2MM3aX4uV04QoBUlgYbjHJXIvbHAcrVNXyjlsaqGyslODYEfAaPswCPY0B8F0eB1ZfJckpDQ0RX/7BwEYg+9sPufM=
-  - secure: o92yid4S1izWt9x/+jHwbFJN+rwhSoF15+c9PPfNzoJIkHqOHQfiaZs1zalLnf9/Oxk9FYQbzleMHeTLj7cdpncMXdiNRVW8P3YzgmYakrDljH1BAqwFUoXeRveQdf4tUr03d372xznEhGnxhDDxk6+u23tlZDkn99MACSZJTemcKBNvZshLWMwc5W272FvlFUp+5PJqt6wMhDweVbSQ9JDBLMl5Y7/Z7dS423YQyJMX8FJYDNJdR5rj1nTpk6XkL4fXfNYz3T50H29MHlUle5xZc9ApBnpp0QGt0q31a3Q3/wp6Hxip5+ew1Zx6Lv3SiQ3I0tuuVZaIQWjZ03tkV/5Vt4MU0I3awVocYbiAhZt2GfqR6UubB/nk2CIXxoPFvs9jAD1lZL3W4+3OTli7deQBjbiOTCRGt6qu+kViQQD7U0licd41MIn3NjjW7bczbcCLjLqGSWBC94fml9Hze42OcnCfv2jbRMxkomrxQefNjzG7dcl6251hmNQndZ81sD/0qUdV3Lsg5KXjNycNelLBRkdKNZYvekP6D2ws9ADWoJ4zIkRXNops5+unTnDh82hdPEu2/ex0HZPFt63yuXgLM15UCFNNdI2M7ZL3eM3b2oDzVGwtLwS+tuHWPvnBswQC5LTeqI1LkhcLnAPhkDzpmVr5W+0dDyCtwZQks9Y=
