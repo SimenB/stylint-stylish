@@ -58,7 +58,7 @@
     "jest": "^23.6.0",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
-    "strip-ansi": "^4.0.0",
+    "strip-ansi": "^5.0.0",
     "stylint": "^1.5.9"
   },
   "peerDependencies": {
