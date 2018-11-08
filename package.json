@@ -37,7 +37,7 @@
     "chalk": "^2.0.1",
     "lodash.isnumber": "^3.0.3",
     "log-symbols": "^2.0.0",
-    "path-is-absolute": "^1.0.1",
+    "path-is-absolute": "^2.0.0",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
