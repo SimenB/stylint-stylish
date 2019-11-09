@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/SimenB/stylint-stylish#readme",
   "dependencies": {
-    "chalk": "^2.0.1",
+    "chalk": "^3.0.0",
     "lodash.isnumber": "^3.0.3",
     "log-symbols": "^2.0.0",
     "path-is-absolute": "^1.0.1",
