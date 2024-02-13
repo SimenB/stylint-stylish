@@ -6,7 +6,6 @@ import logSymbols from 'log-symbols';
 
 import stylint from 'stylint';
 import path from 'path';
-import clone from 'lodash.clonedeep';
 import origCache from 'stylint/src/core/cache';
 import origState from 'stylint/src/core/state';
 
@@ -18,8 +17,8 @@ let stylintInstance;
 beforeEach(() => {
   stylintInstance = stylint().create();
 
-  stylintInstance.state = clone(origState);
-  stylintInstance.cache = clone(origCache);
+  stylintInstance.state = JSON.parse(JSON.stringify(origState));
+  stylintInstance.cache = JSON.parse(JSON.stringify(origCache));
 
   stylintInstance.state.quiet = true;
   stylintInstance.state.watching = true;

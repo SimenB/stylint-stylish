@@ -34,7 +34,6 @@
   "homepage": "https://github.com/SimenB/stylint-stylish#readme",
   "dependencies": {
     "chalk": "^2.0.1",
-    "lodash.isnumber": "^3.0.3",
     "log-symbols": "^2.0.0",
     "path-is-absolute": "^1.0.1",
     "text-table": "^0.2.0"
@@ -47,7 +46,6 @@
     "eslint": "^5.5.0",
     "eslint-config-simenb-base": "^15.0.0",
     "jest": "^24.0.0",
-    "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
     "rimraf": "^3.0.0",
     "strip-ansi": "^4.0.0",

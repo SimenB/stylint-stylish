@@ -3,7 +3,6 @@ import pathIsAbsolute from 'path-is-absolute';
 import chalk from 'chalk';
 import logSymbols from 'log-symbols';
 import table from 'text-table';
-import isNumber from 'lodash.isnumber';
 
 let currFile;
 let currTable = [];
@@ -29,7 +28,7 @@ function createSummary(errs, warns, total, maxErrors, maxWarnings) {
   if (errs > 0) {
     output += `  ${logSymbols.error}  ${errs} ${errs > 1 ? 'errors' : 'error'}`;
 
-    if (isNumber(maxErrors)) {
+    if (typeof maxErrors === 'number') {
       output += ` (Max Errors: ${maxErrors})`;
     }
 
@@ -41,7 +40,7 @@ function createSummary(errs, warns, total, maxErrors, maxWarnings) {
       warns > 1 ? 'warnings' : 'warning'
     }`;
 
-    if (isNumber(maxWarnings)) {
+    if (typeof maxWarnings === 'number') {
       output += ` (Max Warnings: ${maxWarnings})`;
     }
 
@@ -109,7 +108,7 @@ export default function(msg, done, kill) {
     filenames[currTable.length] = chalk.underline(filename);
   }
 
-  const column = isNumber(this.cache.col) ? this.cache.col : -1;
+  const column = typeof this.cache.col === 'number' ? this.cache.col : -1;
   const rule = options.ruleName ? chalk.gray(this.cache.rule || '') : '';
 
   currTable.push([
