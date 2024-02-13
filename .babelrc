@@ -1,16 +1,16 @@
 {
   "plugins": [
     "babel-plugin-add-module-exports",
-    "transform-es2015-modules-commonjs",
-    "transform-es2015-block-scoping",
-    "transform-es2015-destructuring",
-    "transform-es2015-template-literals",
-    "transform-es2015-shorthand-properties",
-    "transform-es2015-arrow-functions"
   ],
-  "env": {
-    "test": {
-      "sourceMap": "inline"
-    }
-  }
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "bugfixes": true,
+        "targets": {
+          "node": "6.0.0"
+        }
+      }
+    ]
+  ]
 }
