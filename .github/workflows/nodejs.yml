@@ -62,7 +62,7 @@ jobs:
         with:
           flag-name: run-${{ join(matrix.*, '-') }}
           parallel: true
-  finish:
+  upload-coverage:
     needs: test-node
     if: ${{ always() }}
     runs-on: ubuntu-latest
@@ -93,7 +93,7 @@ jobs:
 
     if: ${{ github.event_name == 'push' && (github.event.ref == 'refs/heads/master' || github.event.ref == 'refs/heads/next') }}
     name: Release new version
-    needs: [lint, test-node, test-ubuntu, test-macos, test-windows]
+    needs: [lint, test-node, test-ubuntu, test-macos, test-windows, upload-coverage]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
