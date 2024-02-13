@@ -11,10 +11,8 @@
     "build": "babel stylish.js -o index.js",
     "cover": "yarn test --coverage",
     "lint": "eslint .",
-    "pretravis": "yarn lint",
-    "precover": "yarn clean",
     "prepublishOnly": "yarn clean && yarn build",
-    "pretest": "yarn lint",
+    "pretest": "yarn clean",
     "test": "jest --forceExit"
   },
   "repository": "SimenB/stylint-stylish",
