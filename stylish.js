@@ -1,5 +1,4 @@
 import path from 'path';
-import pathIsAbsolute from 'path-is-absolute';
 import chalk from 'chalk';
 import logSymbols from 'log-symbols';
 import table from 'text-table';
@@ -98,9 +97,9 @@ export default function(msg, done, kill) {
     let filename;
 
     if (options.absolutePath) {
-      filename = pathIsAbsolute(currFile) ? currFile : path.resolve(currFile);
+      filename = path.isAbsolute(currFile) ? currFile : path.resolve(currFile);
     } else {
-      filename = pathIsAbsolute(currFile)
+      filename = path.isAbsolute(currFile)
         ? path.relative(process.cwd(), currFile)
         : currFile;
     }
