@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "clean": "del-cli coverage/ index.js",
+    "clean": "rimraf coverage/ index.js",
     "build": "babel stylish.js -o index.js",
     "cover": "yarn test --coverage",
     "lint": "eslint .",
@@ -51,12 +51,12 @@
     "babel-register": "^6.18.0",
     "codeclimate-test-reporter": "^0.5.0",
     "coveralls": "^3.0.0",
-    "del-cli": "^1.0.0",
     "eslint": "^5.5.0",
     "eslint-config-simenb-base": "^15.0.0",
     "jest": "^23.6.0",
     "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.4.0",
+    "rimraf": "^3.0.0",
     "strip-ansi": "^4.0.0",
     "stylint": "^1.5.9"
   },
