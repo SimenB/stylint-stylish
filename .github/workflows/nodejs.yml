@@ -57,6 +57,20 @@ jobs:
           CC_TEST_REPORTER_ID: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
         with:
           coverageCommand: yarn cover
+      - uses: coverallsapp/github-action@v2
+        if: ${{ always() }}
+        with:
+          flag-name: run-${{ join(matrix.*, '-') }}
+          parallel: true
+  finish:
+    needs: test-node
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@v2
+      with:
+        parallel-finished: true
   test-ubuntu:
     uses: ./.github/workflows/test.yml
     with:
