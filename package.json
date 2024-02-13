@@ -77,5 +77,8 @@
         "statements": 100
       }
     }
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

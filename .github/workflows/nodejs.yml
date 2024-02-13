@@ -1,0 +1,110 @@
+name: Unit tests & Release
+
+on:
+  push:
+    branches:
+      - master
+      - next
+  pull_request:
+    branches:
+      - master
+      - next
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  prepare-yarn-cache-ubuntu:
+    uses: ./.github/workflows/prepare-cache.yml
+    with:
+      os: ubuntu-latest
+  prepare-yarn-cache-macos:
+    uses: ./.github/workflows/prepare-cache.yml
+    with:
+      os: macos-latest
+  prepare-yarn-cache-windows:
+    uses: ./.github/workflows/prepare-cache.yml
+    with:
+      os: windows-latest
+
+  lint:
+    needs: prepare-yarn-cache-ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: yarn
+      - name: install
+        run: yarn
+      - name: run ESLint
+        run: yarn lint
+
+  test-node:
+    name: Test on Node.js v${{ matrix.node-version }}
+    needs: prepare-yarn-cache-ubuntu
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [6.x, 8.x, 10.x, 12.x, 14.x, 16.x, 18.x, 20.x, 21.x]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - name: run tests
+        run: yarn test
+        env:
+          CI: true
+  test-ubuntu:
+    uses: ./.github/workflows/test.yml
+    needs: prepare-yarn-cache-ubuntu
+    with:
+      os: ubuntu-latest
+  test-macos:
+    uses: ./.github/workflows/test.yml
+    needs: prepare-yarn-cache-macos
+    with:
+      os: macos-latest
+  test-windows:
+    uses: ./.github/workflows/test.yml
+    needs: prepare-yarn-cache-windows
+    with:
+      os: windows-latest
+
+  release:
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+
+    if: ${{ github.event_name == 'push' && (github.event.ref == 'refs/heads/master' || github.event.ref == 'refs/heads/next') }}
+    name: Release new version
+    needs: [lint, test-node, test-ubuntu, test-macos, test-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: npx semantic-release@15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
