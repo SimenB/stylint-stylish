@@ -66,10 +66,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: yarn
       - run: yarn install --frozen-lockfile
-      - name: run tests
-        run: yarn test
+      - uses: paambaati/codeclimate-action@v5
         env:
-          CI: true
+          CC_TEST_REPORTER_ID: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
+        with:
+          coverageCommand: yarn cover
   test-ubuntu:
     uses: ./.github/workflows/test.yml
     needs: prepare-yarn-cache-ubuntu

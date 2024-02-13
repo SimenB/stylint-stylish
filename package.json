@@ -9,14 +9,13 @@
   "scripts": {
     "clean": "del-cli coverage/ index.js",
     "build": "babel stylish.js -o index.js",
-    "cover": "npm run test -- --coverage",
+    "cover": "yarn test --coverage",
     "lint": "eslint .",
-    "pretravis": "npm run lint",
-    "precover": "npm run clean",
-    "prepublishOnly": "npm run clean && npm run build",
-    "pretest": "npm run lint",
-    "test": "jest --forceExit",
-    "travis": "npm run cover"
+    "pretravis": "yarn lint",
+    "precover": "yarn clean",
+    "prepublishOnly": "yarn clean && yarn build",
+    "pretest": "yarn lint",
+    "test": "jest --forceExit"
   },
   "repository": "SimenB/stylint-stylish",
   "keywords": [
