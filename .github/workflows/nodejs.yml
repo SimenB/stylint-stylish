@@ -57,6 +57,20 @@ jobs:
           CC_TEST_REPORTER_ID: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
         with:
           coverageCommand: yarn cover
+      - uses: coverallsapp/github-action@v2
+        if: ${{ always() }}
+        with:
+          flag-name: run-${{ join(matrix.*, '-') }}
+          parallel: true
+  upload-coverage:
+    needs: test-node
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@v2
+      with:
+        parallel-finished: true
   test-ubuntu:
     uses: ./.github/workflows/test.yml
     with:
@@ -79,7 +93,7 @@ jobs:
 
     if: ${{ github.event_name == 'push' && (github.event.ref == 'refs/heads/master' || github.event.ref == 'refs/heads/next') }}
     name: Release new version
-    needs: [lint, test-node, test-ubuntu, test-macos, test-windows]
+    needs: [lint, test-node, test-ubuntu, test-macos, test-windows, upload-coverage]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
