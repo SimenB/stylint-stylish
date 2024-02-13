@@ -18,21 +18,7 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
-  prepare-yarn-cache-ubuntu:
-    uses: ./.github/workflows/prepare-cache.yml
-    with:
-      os: ubuntu-latest
-  prepare-yarn-cache-macos:
-    uses: ./.github/workflows/prepare-cache.yml
-    with:
-      os: macos-latest
-  prepare-yarn-cache-windows:
-    uses: ./.github/workflows/prepare-cache.yml
-    with:
-      os: windows-latest
-
   lint:
-    needs: prepare-yarn-cache-ubuntu
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,13 +29,12 @@ jobs:
           node-version: lts/*
           cache: yarn
       - name: install
-        run: yarn
+        run: yarn --frozen-lockfile
       - name: run ESLint
         run: yarn lint
 
   test-node:
     name: Test on Node.js v${{ matrix.node-version }}
-    needs: prepare-yarn-cache-ubuntu
     strategy:
       fail-fast: false
       matrix:
@@ -65,25 +50,23 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile --ignore-engines
       - uses: paambaati/codeclimate-action@v5
+        if: ${{ always() }}
         env:
           CC_TEST_REPORTER_ID: d3494c5bb5f3df7d98635dbc2aa962c7ce5e14c61f574a8c7304dfa9bc8783e4
         with:
           coverageCommand: yarn cover
   test-ubuntu:
     uses: ./.github/workflows/test.yml
-    needs: prepare-yarn-cache-ubuntu
     with:
       os: ubuntu-latest
   test-macos:
     uses: ./.github/workflows/test.yml
-    needs: prepare-yarn-cache-macos
     with:
       os: macos-latest
   test-windows:
     uses: ./.github/workflows/test.yml
-    needs: prepare-yarn-cache-windows
     with:
       os: windows-latest
 
