@@ -46,10 +46,10 @@
     "prettier": "^1.4.0",
     "rimraf": "^3.0.0",
     "strip-ansi": "^4.0.0",
-    "stylint": "^1.5.9"
+    "stylint": "^2.0.0"
   },
   "peerDependencies": {
-    "stylint": "1.x"
+    "stylint": "2.x"
   },
   "engines": {
     "node": ">=4"
